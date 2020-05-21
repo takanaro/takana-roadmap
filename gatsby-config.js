@@ -5,6 +5,14 @@ require('ts-node').register({
     target: 'es2017',
   },
 });
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
+const contentfulConfig = {
+  spaceId: process.env.CONTENTFUL_SPACE_ID,
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+};
 
 /**
  * Configure your Gatsby site with this file.
@@ -32,5 +40,9 @@ module.exports = {
       },
     },
     `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-source-contentful`,
+      options: contentfulConfig,
+    },
   ],
 };
