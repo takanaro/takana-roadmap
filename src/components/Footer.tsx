@@ -15,6 +15,7 @@ interface DataProps {
   site: {
     siteMetadata: {
       title: string;
+      author: string;
     };
     buildTime: string;
   };
@@ -25,13 +26,17 @@ const Footer = () => {
     {
       site {
         buildTime(formatString: "DD.MM.YYYY")
+        siteMetadata {
+          title
+          author
+        }
       }
     }
   `;
   const render = (data: DataProps) => {
     return (
       <FooterWrapper>
-        &copy; {split(data.site.buildTime, '.')[2]} by Majid Hajian. All rights reserved. <br />{' '}
+        &copy; {split(data.site.buildTime, '.')[2]} by {data.site.siteMetadata.author}. All rights reserved. <br />{' '}
         <a href="https://github.com/mhadaily/gatsby-starter-typescirpt-power-blog">
           GitHub Repository{' '}
         </a>{' '}

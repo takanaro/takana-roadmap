@@ -5,6 +5,7 @@ import { Footer } from './Footer';
 
 // import '../style/all.scss';
 import { darkTheme, lightTheme } from '../theme';
+import Navbar from './Navbar';
 
 const ModeButton = styled.button`
   background: none;
@@ -32,6 +33,7 @@ const Layout = ({ children }: { children: any }) => {
   };
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <Navbar></Navbar>
       <React.Fragment>
         <GlobalStyle />
         <ModeButton onClick={toggelThemeMode}>
