@@ -32,6 +32,16 @@ module.exports = {
     author: config.author,
     twitter: config.userTwitter,
     facebook: config.ogSiteName,
+    menuLinks: [
+      {
+        "name": "Blog",
+        "link": "/blog"
+      },
+      {
+        "name": "Profile",
+        "link": "/profile"
+      }
+    ]
   },
   plugins: [
     {

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { darken, lighten, rgba } from 'polished';
 import { media } from '../utils/media';
 import config from '../../config/SiteConfig';
+import { Link } from 'gatsby';
 
 const HeaderWrapper = styled.header<{ banner: string }>`
   position: relative;
@@ -38,14 +39,32 @@ const Content = styled.div`
 interface Props {
   children: any;
   banner?: string;
+  site: any;
 }
 
-const Header = (props: Props) => {
+export const Header = (props: Props) => {
   return (
     <HeaderWrapper banner={props.banner || config.defaultBg}>
       <Content>{props.children}</Content>
+      <div>
+          <nav>
+            <ul style={{ display: "flex", flex: 1 }}>
+              {props.site.siteMetadata.menuLinks.map((link: any)=> (
+                <li
+                  key={link.name}
+                  style={{
+                    listStyleType: `none`,
+                    padding: `1rem`,
+                  }}
+                >
+                  <Link style={{ color: `white` }} to={link.link}>
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
     </HeaderWrapper>
   );
 };
-
-export { Header };

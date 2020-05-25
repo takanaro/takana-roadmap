@@ -42,7 +42,6 @@ export const EntryPostTemplate = (props: Props) => {
   return (
     <Layout>
       <JsonLD breadList={breadcrumbLists}></JsonLD>
-      <Header children={breadcrumbLists}></Header>
       <ContentfulSeo postPath="entry" postNode={postData} postSEO={true} />
 
       <div>{postData.title}</div>
