@@ -1,10 +1,10 @@
 export * from './Article';
 // export * from './Button';
 export * from './Header';
-export * from './Layout';
+export * from './layout';
 // export * from './PrevNext';
 // export * from './SectionTitle';
-export * from './SEO';
+// export * from './SEO';
 // export * from './Subline';
 // export * from './Wrapper';
 // export * from './Content';

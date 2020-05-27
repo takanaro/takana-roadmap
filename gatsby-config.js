@@ -1,10 +1,15 @@
 'use strict';
+// strictモードではグローバル変数の定義ができなくなるらしい
+
+// TypeScriptのモジュールを読み込めるようにする
 require('ts-node').register({
   compilerOptions: {
     module: 'commonjs',
     target: 'esnext',
   },
 });
+
+// dotファイルから環境変数を取得
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
@@ -16,6 +21,11 @@ const contentfulConfig = {
   spaceId: process.env.CONTENTFUL_SPACE_ID,
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
 };
+
+// プレビューモードで起動する場合(下書きも公開する)
+if (process.env.CONTENTFUL_HOST) {
+  contentfulConfig.host = process.env.CONTENTFUL_HOST;
+}
 
 module.exports = {
   pathPrefix: pathPrefix,
@@ -51,7 +61,6 @@ module.exports = {
         allExtensions: true, // defaults to false
       },
     },
-    `gatsby-plugin-react-helmet`, // Helmet使うために必要
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -67,8 +76,10 @@ module.exports = {
         name: 'images',
       },
     },
-    'gatsby-plugin-sharp', // 画像処理低レベルのヘルパープラグイン
+    `gatsby-transformer-remark`, // MarkDown変換プラグイン
     `gatsby-transformer-sharp`, // 画像処理ライブラリ、画像のサイズ変更等が可能になる
+    `gatsby-plugin-react-helmet`, // Helmet使うために必要
+    'gatsby-plugin-sharp', // 画像処理低レベルのヘルパープラグイン
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -82,7 +93,6 @@ module.exports = {
         icon: config.favicon,
       },
     },
-    `gatsby-transformer-remark`, // MarkDown変換プラグイン
     {
       resolve: `gatsby-source-contentful`,
       options: contentfulConfig,
