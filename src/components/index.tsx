@@ -1,6 +1,6 @@
 export * from './Article';
 // export * from './Button';
-export * from './Header';
+export * from './header';
 export * from './layout';
 // export * from './PrevNext';
 // export * from './SectionTitle';

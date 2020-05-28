@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from '../theme/GlobalStyle';
-import { Footer } from './Footer';
+import { Footer } from './footer';
 
 // import '../style/all.scss';
 import { darkTheme, lightTheme } from '../theme';
-import Navbar from './Navbar';
 import { useStaticQuery, graphql, Link } from 'gatsby';
-import { Header } from './Header';
+import { Header } from './header';
+import { useMediaQuery } from 'react-responsive';
 
-import "../styles/global.css"
+// import '../styles/global.css';
 
 const ModeButton = styled.button`
   background: none;
@@ -34,7 +34,23 @@ const useHandleMenu = () => {
   };
 };
 
-const Layout = ({ children }: { children: any }) => {
+export const Layout = ({ children }: { children: any }) => {
+  const Desktop = ({ children }: {children: any}) => {
+    const isDesktop = useMediaQuery({ minWidth: 992 })
+    return isDesktop ? children : null
+  }
+  const Tablet = ({ children }) => {
+    const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 991 })
+    return isTablet ? children : null
+  }
+  const Mobile = ({ children }) => {
+    const isMobile = useMediaQuery({ maxWidth: 767 })
+    return isMobile ? children : null
+  }
+  const Default = ({ children }) => {
+    const isNotMobile = useMediaQuery({ minWidth: 768 })
+    return isNotMobile ? children : null
+  }
   const stored = typeof window !== 'undefined' && localStorage.getItem('isDarkMode');
   const [isDarkMode, setIsDarkMode] = useState(stored === 'true' ? true : false);
 
@@ -73,9 +89,12 @@ const Layout = ({ children }: { children: any }) => {
         {/* <Header site={data.site}>
         たかなろーどまっぷ
       </Header> */}
-        <Header data={data.contentfulSiteInformation} siteTitle="aa" header="home"></Header>
         <GlobalStyle />
+        <Header data={data.contentfulSiteInformation} siteTitle="aa" header="home"></Header>
         <ModeButton onClick={toggelThemeMode}>
+          <Desktop>
+aaa
+          </Desktop>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -97,5 +116,3 @@ const Layout = ({ children }: { children: any }) => {
     </ThemeProvider>
   );
 };
-
-export { Layout };

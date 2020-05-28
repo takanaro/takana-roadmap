@@ -80,6 +80,7 @@ module.exports = {
     `gatsby-transformer-sharp`, // 画像処理ライブラリ、画像のサイズ変更等が可能になる
     `gatsby-plugin-react-helmet`, // Helmet使うために必要
     'gatsby-plugin-sharp', // 画像処理低レベルのヘルパープラグイン
+    `gatsby-plugin-sass`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
